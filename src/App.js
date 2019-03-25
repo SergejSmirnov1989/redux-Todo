@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
+import NewItem from './Components/NewItem/NewItem';
 
-class App extends Component {
-  render() {
-    return <div className="App" />;
-  }
-}
-
-export default App;
+export default () => {
+  return (
+    <div className="app">
+      <NewItem />
+    </div>
+  );
+};
