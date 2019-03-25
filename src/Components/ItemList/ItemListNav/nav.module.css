@@ -1,0 +1,22 @@
+.nav {
+    display: flex;
+    flex-direction: column;
+    width: 270px;
+    min-height: 100vh;
+    border-right: 2px solid #c9c9c9;
+
+    background: #e9e9e9
+}
+
+.link {
+    box-sizing: border-box;
+    width: 250px;
+    height: 40px;
+    margin: 10px;
+    padding-top: 10px;
+    border-radius: 5px;
+    background: #95C11F;
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+}

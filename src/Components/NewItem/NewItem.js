@@ -34,7 +34,8 @@ class NewItem extends Component {
   onButtonClick = () => {
     const { refreshErrors, validate, addNewItem } = this.props;
     const { title, text, selectedDay } = this.state;
-    const item = { title, text, selectedDay };
+    const status = 'active';
+    const item = { title, text, selectedDay, status };
 
     if (!validate) return;
 
