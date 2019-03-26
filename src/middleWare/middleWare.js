@@ -12,11 +12,11 @@ export const itemMiddleWare = store => next => action => {
     }
     return item;
   });
-  // store.getState().items.map(item => {
-  //   if (item.selectedDay < Date.now()) {
-  //     item.status = 'expired';
-  //   }
-  //   return item
-  // });
+  store.getState().items.map(item => {
+    if (item.selectedDay < Date.now() && item.selectedDay !== null) {
+      item.status = 'expired';
+    }
+    return item;
+  });
   localStorage.setItem(STORAGE_NAME, JSON.stringify(store.getState().items));
 };
