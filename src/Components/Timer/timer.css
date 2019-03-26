@@ -1,0 +1,25 @@
+.timer {
+    position: relative;
+    width: 90%;
+    margin-left: 20px;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: rgba(200, 200, 200, 0.2);
+    text-align: center;
+    font-size: 40px;
+}
+
+.timer-wrapper {
+    display: flex;
+    width: 50%;
+    margin: 0 auto;
+    padding-top: 20px;
+    justify-content: space-around;
+}
+
+.timer-elem {
+    width: 100px;
+    background-color: white;
+    font-size: 20px;
+}
+

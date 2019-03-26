@@ -7,9 +7,11 @@ export const itemMiddleWare = store => next => action => {
     if (!item.id) {
       item.id = uniqid();
     }
+    if (!item.createdAt) {
+      item.createdAt = Date.now();
+    }
     return item;
   });
-
   // store.getState().items.map(item => {
   //   if (item.selectedDay < Date.now()) {
   //     item.status = 'expired';

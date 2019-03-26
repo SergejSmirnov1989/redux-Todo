@@ -1,4 +1,4 @@
 .item-list {
-    display: flex;
-    flex-wrap: nowrap;
+    padding-top: 80px;
+    padding-left: 270px;
 }

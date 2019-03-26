@@ -1,0 +1,20 @@
+.main {
+    display: flex;
+    padding-top: 80px;
+}
+
+.left {
+    width: 50%;
+}
+
+.right {
+    width: 50%;
+}
+
+.count {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color:  rgba(200, 200, 200, 0.2);
+    font-size: 20px;
+}
