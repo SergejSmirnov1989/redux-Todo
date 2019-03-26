@@ -4,6 +4,7 @@ import NewItem from './Components/NewItem/NewItem';
 import ItemList from './Components/ItemList';
 import TodoNav from './Components/TodoNav';
 import StartPage from './Components/StartPage/StartPage';
+import ItemEdit from './Components/ItemEdit/ItemEdit';
 
 export default () => {
   return (
@@ -13,6 +14,7 @@ export default () => {
         <Route path="/" component={StartPage} exact />
         <Route path="/new-item" component={NewItem} />
         <Route path="/items" component={ItemList} />
+        <Route path="/edit" component={ItemEdit} />
       </BrowserRouter>
     </div>
   );

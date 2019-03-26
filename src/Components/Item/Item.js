@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import assignPropTypes from 'assign-prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { deleteItem, setStatus } from '../../action';
+import { deleteItem, rememberPathId, setStatus } from '../../action';
 import style from './item.module.css';
 
 export default withRouter(
@@ -14,13 +14,18 @@ export default withRouter(
     {
       setComplete: setStatus,
       removeItem: deleteItem,
+      remPath: rememberPathId,
     },
   )(
     assignPropTypes({
+      id: PropTypes.string,
       showButtons: PropTypes.bool,
-      item: PropTypes.object,
+      history: PropTypes.object,
+      items: PropTypes.array,
       setComplete: PropTypes.func,
-    })(({ id, setComplete, removeItem, items, history, showButtons = false }) => {
+      removeItem: PropTypes.func,
+      remPath: PropTypes.func,
+    })(({ id, setComplete, removeItem, items, history, remPath, showButtons = false }) => {
       const item = items.filter(item => item.id === id);
       const { selectedDay, title, text, status } = item[0];
 
@@ -28,8 +33,13 @@ export default withRouter(
         history.push(`/items/active`);
       };
 
+      const onDBLClick = () => {
+        remPath(history.location.pathname, id);
+        history.push('/edit');
+      };
+
       return (
-        <div className={style.item}>
+        <div onDoubleClick={onDBLClick} className={style.item}>
           <h1 className={style.title}>{title}</h1>
           {selectedDay && !showButtons && (
             <div className={style.date}>

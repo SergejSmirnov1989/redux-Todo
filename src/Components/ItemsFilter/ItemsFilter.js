@@ -19,6 +19,7 @@ export default connect(state => ({
       items.sort((a, b) => {
         if (a[sortBy] > b[sortBy]) return 1;
         if (a[sortBy] < b[sortBy]) return -1;
+        return 0;
       });
 
       if (!params.hasOwnProperty('id')) {

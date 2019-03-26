@@ -3,3 +3,5 @@ export const NEW_ITEM = 'NEW_ITEM';
 export const SET_STATUS = 'SET_STATUS';
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const SORT_CREATE = 'SORT_CREATE';
+export const EDIT = 'EDIT';
+export const EDIT_SAVE = 'EDIT_SAVE';

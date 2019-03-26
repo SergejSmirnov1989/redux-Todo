@@ -18,3 +18,14 @@ export const newItemRules = {
     futureDay: 1000 * 60 * 60 * 24,
   },
 };
+
+export const editRules = {
+  fields: {
+    text: null,
+  },
+  text: {
+    required: true,
+    min: 20,
+    max: 500,
+  },
+};

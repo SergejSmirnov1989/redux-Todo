@@ -9,10 +9,10 @@ export default () => {
         TODO-шка
       </NavLink>
       <NavLink className={style.link} activeClassName={style.active} to="/new-item">
-        Новая заметка
+        Новая запись
       </NavLink>
       <NavLink className={style.link} activeClassName={style.active} to="/items">
-        ХЗ как назвать
+        Записи
       </NavLink>
     </nav>
   );

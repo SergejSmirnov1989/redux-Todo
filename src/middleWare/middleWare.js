@@ -18,6 +18,5 @@ export const itemMiddleWare = store => next => action => {
   //   }
   //   return item
   // });
-
   localStorage.setItem(STORAGE_NAME, JSON.stringify(store.getState().items));
 };
