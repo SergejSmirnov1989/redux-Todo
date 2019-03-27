@@ -7,12 +7,18 @@ class Timer extends Component {
     deadline: PropTypes.number,
   };
 
+  constructor(props) {
+    super();
+    this.state = {
+      timer: props.deadline - Date.now(),
+    };
+  }
+
   componentDidMount = () => {
-    const timerId = setInterval(() => {
-      if (this.timerRef === null) {
-        return clearInterval(timerId);
-      }
-      this.timerRef.innerHTML = this.timerDeadLine().__html;
+    setInterval(() => {
+      this.setState(() => ({
+        timer: this.props.deadline - Date.now(),
+      }));
     }, 1000);
   };
 
@@ -33,28 +39,33 @@ class Timer extends Component {
     const M = (H % 1) * 60;
     const S = (M % 1) * 60;
 
-    return {
-      __html: `<div class='timer'>До ближайшего deadline осталось
-        <div class='timer-wrapper'>
-          <div class='timer-elem'>
-            ${Math.floor(D)}<br> ${this.declOfNum(Math.floor(D), ['день', 'дня', 'дней'])}
+    return (
+      <div className="timer">
+        До ближайшего deadline осталось
+        <div className="timer-wrapper">
+          <div className="timer-elem">
+            {Math.floor(D)}
+            <br /> {this.declOfNum(Math.floor(D), ['день', 'дня', 'дней'])}
           </div>
-          <div class='timer-elem'>
-            ${Math.floor(H)}<br> ${this.declOfNum(Math.floor(H), ['час', 'часа', 'часов'])}
+          <div className="timer-elem">
+            {Math.floor(H)}
+            <br /> {this.declOfNum(Math.floor(H), ['час', 'часа', 'часов'])}
           </div>
-          <div class='timer-elem'>
-            ${Math.floor(M)}<br> ${this.declOfNum(Math.floor(M), ['минута', 'минуты', 'минут'])}
+          <div className="timer-elem">
+            {Math.floor(M)}
+            <br /> {this.declOfNum(Math.floor(M), ['минута', 'минуты', 'минут'])}
           </div>
-          <div class='timer-elem'>
-            ${Math.floor(S)}<br> ${this.declOfNum(Math.floor(S), ['секунда', 'секунды', 'секунд'])}
+          <div className="timer-elem">
+            {Math.floor(S)}
+            <br /> {this.declOfNum(Math.floor(S), ['секунда', 'секунды', 'секунд'])}
           </div>
         </div>
-      </div>`,
-    };
+      </div>
+    );
   };
 
   render() {
-    return <div ref={this.getTimerRef} dangerouslySetInnerHTML={this.timerDeadLine()} />;
+    return <div>{this.timerDeadLine()}</div>;
   }
 }
 
