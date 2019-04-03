@@ -7,25 +7,21 @@ export default (store = defaultStore, { type, payload }) => {
     case NEW_ITEM:
       return store.concat(payload.item);
     case SET_STATUS:
-      return store
-        .map(item => {
-          if (item.id === payload.id) {
-            item.status = item.status === 'active' ? 'complete' : 'active';
-          }
-          return item;
-        })
-        .slice();
+      return store.map(item => {
+        if (item.id === payload.id) {
+          item.status = item.status === 'active' ? 'complete' : 'active';
+        }
+        return item;
+      });
     case DELETE_ITEM:
       return store.filter(item => item.id !== payload.id);
     case EDIT_SAVE:
-      return store
-        .map(item => {
-          if (item.id === payload.id) {
-            item.text = payload.text;
-          }
-          return item;
-        })
-        .slice();
+      return store.map(item => {
+        if (item.id === payload.id) {
+          item.text = payload.text;
+        }
+        return item;
+      });
     default:
       return store;
   }

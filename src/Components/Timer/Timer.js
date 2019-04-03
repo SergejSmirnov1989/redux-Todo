@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './timer.css';
+import 'Components/Timer/timer.css';
 
 class Timer extends Component {
   static propTypes = {

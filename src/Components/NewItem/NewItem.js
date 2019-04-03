@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Validator from '../../Decorator/Validator';
+import Validator from 'Decorator/Validator';
 import Form from './Form/Form';
-import NewItemPreView from './NewItemPreView/NewItemPreView';
-import { newItemRules as validateRules } from '../../const/validateRules';
+import NewItemPreView from './NewItemPreView';
+import { newItemRules as validateRules } from 'const/validateRules';
 import style from './new-item.module.css';
-import { newItem } from '../../action';
+import { onNewItemSave } from 'action';
 
 class NewItem extends Component {
   static propTypes = {
     errors: PropTypes.object,
+    history: PropTypes.object,
     validate: PropTypes.bool,
     refreshErrors: PropTypes.func,
     validateFields: PropTypes.func,
-    addNewItem: PropTypes.func,
+    handleNewItemAdd: PropTypes.func,
   };
 
   state = {
@@ -32,20 +33,20 @@ class NewItem extends Component {
   };
 
   onButtonClick = () => {
-    const { refreshErrors, validate, addNewItem } = this.props;
+    const { refreshErrors, validate, handleNewItemAdd } = this.props;
     const { title, text, selectedDay } = this.state;
     const status = 'active';
     const item = { title, text, selectedDay, status };
 
     if (!validate) return;
 
-    addNewItem(item);
+    handleNewItemAdd(item);
     this.clearState();
     refreshErrors(JSON.parse(JSON.stringify(validateRules.fields)));
   };
 
   onCancelClick = () => {
-    const { refreshErrors } = this.props;
+    const { refreshErrors, history } = this.props;
     this.clearState();
     refreshErrors(JSON.parse(JSON.stringify(validateRules.fields)));
   };
@@ -102,6 +103,6 @@ class NewItem extends Component {
 export default connect(
   null,
   {
-    addNewItem: newItem,
+    handleNewItemAdd: onNewItemSave,
   },
 )(Validator(NewItem, JSON.parse(JSON.stringify(validateRules))));

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import TextareaAutosize from 'react-textarea-autosize';
-import { editSave } from '../../action';
-import Validator from '../../Decorator/Validator';
-import { editRules } from '../../const/validateRules';
+import { onEditSave } from 'action';
+import Validator from 'Decorator/Validator';
+import { editRules } from 'const/validateRules';
 import style from './edit.module.css';
 
 class ItemEdit extends Component {
@@ -16,7 +16,7 @@ class ItemEdit extends Component {
     history: PropTypes.object,
     refreshErrors: PropTypes.func,
     validateFields: PropTypes.func,
-    textSave: PropTypes.func,
+    handleTextEdit: PropTypes.func,
   };
 
   constructor(props) {
@@ -65,11 +65,11 @@ class ItemEdit extends Component {
   };
 
   handleItemSave = () => {
-    const { textSave, item, history, path, validate, refreshErrors } = this.props;
+    const { handleTextEdit, item, history, path, validate, refreshErrors } = this.props;
     const { text } = this.state;
 
     if (validate) {
-      textSave(text, item[0].id);
+      handleTextEdit(text, item[0].id);
     }
 
     refreshErrors(JSON.parse(JSON.stringify(editRules.fields)));
@@ -125,6 +125,6 @@ export default connect(
     path: state.path,
   }),
   {
-    textSave: editSave,
+    handleTextEdit: onEditSave,
   },
 )(Validator(ItemEdit, JSON.parse(JSON.stringify(editRules))));

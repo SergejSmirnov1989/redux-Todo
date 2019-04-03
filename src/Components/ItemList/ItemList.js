@@ -1,22 +1,52 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import assignPropTypes from 'assign-prop-types';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import ItemListNav from './ItemListNav';
-import ItemsFilter from '../ItemsFilter';
-import style from './item-list.module.css';
+import { sortBy } from 'action';
+import ItemListNav from 'Components/ItemListNav';
+import ItemsFilter from 'Components/ItemsFilter';
 
-export default connect(state => ({ items: state.items }))(
-  assignPropTypes({
+class ItemList extends Component {
+  static propTypes = {
     match: PropTypes.object,
-  })(({ match }) => {
+    items: PropTypes.array,
+    sortBy: PropTypes.string,
+    sortByFunc: PropTypes.func,
+  };
+
+  render() {
+    const { match, items, sortBy, sortByFunc } = this.props;
+
     return (
-      <div className={style['item-list']}>
-        <ItemListNav match={match} />
-        <Route path={`${match.path}`} component={ItemsFilter} exact />
-        <Route path={`${match.path}/:id`} component={ItemsFilter} />
+      <div>
+        <ItemListNav
+          match={match}
+          sortByFunc={sortByFunc}
+          activeCount={items.filter(item => item.status === 'active').length}
+          completeCount={items.filter(item => item.status === 'complete').length}
+          expiredCount={items.filter(item => item.status === 'expired').length}
+          count={items.length}
+        />
+        <Route
+          path={`${match.path}`}
+          render={() => <ItemsFilter items={items} sortBy={sortBy} />}
+          exact
+        />
+        <Route
+          path={`${match.path}/:id`}
+          render={() => <ItemsFilter items={items} sortBy={sortBy} />}
+        />
       </div>
     );
+  }
+}
+
+export default connect(
+  state => ({
+    items: state.items,
+    sortBy: state.sortBy,
   }),
-);
+  {
+    sortByFunc: sortBy,
+  },
+)(ItemList);

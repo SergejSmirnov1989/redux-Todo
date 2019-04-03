@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import Item from '../Item';
-import Timer from '../Timer';
+import ItemContainer from 'Container/ItemContainer';
+import Timer from 'Components/Timer';
 import style from './main.module.css';
 
 class StartPage extends Component {
@@ -28,7 +27,7 @@ class StartPage extends Component {
         {lastElem[0] && (
           <div className={style.right}>
             <Timer deadline={deadline} />
-            <Item id={lastElem[0].id} showButtons />
+            <ItemContainer id={lastElem[0].id} showButtons />
           </div>
         )}
       </div>
@@ -36,18 +35,4 @@ class StartPage extends Component {
   }
 }
 
-export default connect(state => {
-  const deadline = Math.min(
-    ...state.items
-      .filter(item => item.status === 'active' && item.selectedDay)
-      .map(item => item.selectedDay),
-  );
-  return {
-    deadline,
-    lastElem: state.items.filter(item => item.selectedDay === deadline),
-    activeCount: state.items.filter(item => item.status === 'active').length,
-    completeCount: state.items.filter(item => item.status === 'complete').length,
-    expiredCount: state.items.filter(item => item.status === 'expired').length,
-    count: state.items.length,
-  };
-})(StartPage);
+export default StartPage;
