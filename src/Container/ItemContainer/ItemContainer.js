@@ -16,16 +16,25 @@ class ItemContainer extends Component {
     remPath: PropTypes.func,
   };
 
-  handleItemRemove = () => {
-    const { handleItemRemove, id } = this.props;
+  constructor(props) {
+    super();
+    this.state = {
+      pageId: props.id || props.match.url.split('/')[2],
+    };
+  }
 
-    handleItemRemove(id);
+  handleItemRemove = () => {
+    const { handleItemRemove } = this.props;
+    const { pageId } = this.state;
+
+    handleItemRemove(pageId);
   };
 
   handleStatusSet = () => {
-    const { handleStatusSet, id } = this.props;
+    const { handleStatusSet } = this.props;
+    const { pageId } = this.state;
 
-    handleStatusSet(id);
+    handleStatusSet(pageId);
   };
 
   handlePathChange = () => {
@@ -35,18 +44,18 @@ class ItemContainer extends Component {
   };
 
   handleOpenHD = () => {
-    const { match, id, history } = this.props;
+    const { match, history } = this.props;
+    const { pageId } = this.state;
 
     if (match.url.split('/')[1] !== 'item') {
-      history.push(`/item/${id}`);
+      history.push(`/item/${pageId}`);
     }
   };
 
   render() {
-    const { items, id } = this.props;
-    if (!id) {
-    }
-    const item = items.filter(item => item.id === id);
+    const { items } = this.props;
+    const { pageId } = this.state;
+    const item = items.filter(item => item.id === pageId);
     const { selectedDay, title, text, status } = item[0];
     const { showButtons } = this.props;
 

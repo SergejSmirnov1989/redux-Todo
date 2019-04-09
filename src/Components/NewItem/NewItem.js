@@ -46,7 +46,7 @@ class NewItem extends Component {
   };
 
   onCancelClick = () => {
-    const { refreshErrors, history } = this.props;
+    const { refreshErrors } = this.props;
     this.clearState();
     refreshErrors(JSON.parse(JSON.stringify(validateRules.fields)));
   };

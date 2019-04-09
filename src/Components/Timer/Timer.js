@@ -22,8 +22,6 @@ class Timer extends Component {
     }, 1000);
   };
 
-  getTimerRef = node => (this.timerRef = node);
-
   declOfNum = (number, titles) => {
     const cases = [2, 0, 1, 1, 1, 2];
     return titles[
