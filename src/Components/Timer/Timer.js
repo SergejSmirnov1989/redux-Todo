@@ -14,8 +14,10 @@ class Timer extends Component {
     };
   }
 
+  componentWillUnmount = () => clearInterval(this.timerId);
+
   componentDidMount = () => {
-    setInterval(() => {
+    this.timerId = setInterval(() => {
       this.setState(() => ({
         timer: this.props.deadline - Date.now(),
       }));
@@ -30,9 +32,9 @@ class Timer extends Component {
   };
 
   timerDeadLine = () => {
-    const { deadline } = this.props;
+    const { timer } = this.state;
 
-    const D = (deadline - Date.now()) / (1000 * 60 * 60 * 24);
+    const D = timer / (1000 * 60 * 60 * 24);
     const H = (D % 1) * 24;
     const M = (H % 1) * 60;
     const S = (M % 1) * 60;

@@ -11,7 +11,6 @@ import { onNewItemSave } from 'action';
 class NewItem extends Component {
   static propTypes = {
     errors: PropTypes.object,
-    history: PropTypes.object,
     validate: PropTypes.bool,
     refreshErrors: PropTypes.func,
     validateFields: PropTypes.func,
