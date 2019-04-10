@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { sortBy } from 'action';
 import ItemListNav from 'Components/ItemListNav';
 import ItemsFilter from 'Components/ItemsFilter';
+import { getItemsCount } from 'Selectors';
 
 class ItemList extends Component {
   static propTypes = {
@@ -12,20 +13,21 @@ class ItemList extends Component {
     items: PropTypes.array,
     sortBy: PropTypes.string,
     sortByFunc: PropTypes.func,
+    count: PropTypes.object,
   };
 
   render() {
-    const { match, items, sortBy, sortByFunc } = this.props;
+    const { match, items, sortBy, sortByFunc, count } = this.props;
 
     return (
       <div>
         <ItemListNav
           match={match}
           sortByFunc={sortByFunc}
-          activeCount={items.filter(item => item.status === 'active').length}
-          completeCount={items.filter(item => item.status === 'complete').length}
-          expiredCount={items.filter(item => item.status === 'expired').length}
-          count={items.length}
+          activeCount={count.activeCount}
+          completeCount={count.completeCount}
+          expiredCount={count.expiredCount}
+          count={count.count}
         />
         <Route
           path={`${match.path}`}
@@ -45,6 +47,7 @@ export default connect(
   state => ({
     items: state.items,
     sortBy: state.sortBy,
+    count: getItemsCount(state),
   }),
   {
     sortByFunc: sortBy,
