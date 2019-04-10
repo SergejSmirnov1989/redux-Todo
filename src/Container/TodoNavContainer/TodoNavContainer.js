@@ -23,6 +23,7 @@ class TodoNavContainer extends Component {
 
   handleStartSearch = e => {
     const { keyCode } = e;
+    const { search } = this.state;
 
     if (keyCode === PRESS_ESC) {
       this.setState(() => ({
@@ -30,10 +31,9 @@ class TodoNavContainer extends Component {
       }));
       return;
     }
-    if (keyCode !== PRESS_ENTER) return;
+    if (keyCode !== PRESS_ENTER || search === '') return;
 
     const { history } = this.props;
-    const { search } = this.state;
 
     history.push(`/search?q=${search}`);
     this.setState(() => ({
